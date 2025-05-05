@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .movie-card {
+    @apply relative overflow-hidden rounded-lg transition-all duration-300 hover:shadow-xl;
+  }
+
+  .movie-card img {
+    @apply w-full h-full object-cover transition-transform duration-300;
+  }
+
+  .movie-card:hover img {
+    @apply scale-105;
+  }
+
+  .movie-card-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-background to-transparent opacity-0 transition-opacity duration-300 p-4 flex flex-col justify-end;
+  }
+
+  .movie-card:hover .movie-card-overlay {
+    @apply opacity-100;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-md font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-background;
+  }
+
+  .btn-primary {
+    @apply bg-primary-600 text-white hover:bg-primary-700 focus:ring-primary-500;
+  }
+
+  .btn-accent {
+    @apply bg-accent-600 text-white hover:bg-accent-700 focus:ring-accent-500;
+  }
+
+  .btn-outline {
+    @apply border border-muted-300 hover:bg-muted-100 focus:ring-muted-500 dark:border-muted-700 dark:hover:bg-muted-800;
+  }
+
+  .seat {
+    @apply w-8 h-8 m-1 rounded-t-lg flex items-center justify-center text-xs font-medium transition-colors duration-200 cursor-pointer;
+  }
+
+  .seat-available {
+    @apply bg-muted-200 hover:bg-primary-300 text-muted-800;
+  }
+
+  .seat-selected {
+    @apply bg-primary-500 text-white;
+  }
+
+  .seat-booked {
+    @apply bg-muted-700 text-muted-400 cursor-not-allowed;
+  }
+
+  .seat-vip {
+    @apply bg-accent-100 hover:bg-accent-300 text-accent-800;
+  }
+
+  .seat-vip.seat-selected {
+    @apply bg-accent-500 text-white;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted-200 dark:bg-muted-800;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-muted-400 dark:bg-muted-600 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-muted-500 dark:bg-muted-500;
+}
