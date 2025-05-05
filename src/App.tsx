@@ -16,6 +16,7 @@ const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
 const AdminDashboardPage = lazy(() => import('./pages/admin/AdminDashboardPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const MyBookingsPage = lazy(() => import('./pages/MyBookingsPage'));
 
 function App() {
   const { isAuthenticated, isAdmin } = useAuth();
@@ -38,6 +39,8 @@ function App() {
           {/* Protected routes */}
           {isAuthenticated && (
             <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/bookings" element={<MyBookingsPage />} />
+            </>
           )}
           
           {/* Admin routes */}

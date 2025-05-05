@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Menu, X, Film, User, Search } from 'lucide-react';
+import { Menu, X, Film, User, Search, Ticket } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { cn } from '../../lib/utils';
 
@@ -43,9 +43,12 @@ export default function Header() {
             <Link to="/theaters" className="text-sm font-medium hover:text-primary-400 transition-colors">
               Theaters
             </Link>
-            <Link to="/offers" className="text-sm font-medium hover:text-primary-400 transition-colors">
-              Offers
-            </Link>
+            {isAuthenticated && (
+              <Link to="/bookings" className="text-sm font-medium hover:text-primary-400 transition-colors flex items-center">
+                <Ticket className="h-4 w-4 mr-1" />
+                My Bookings
+              </Link>
+            )}
           </nav>
 
           {/* Search Bar - Desktop */}
@@ -71,7 +74,12 @@ export default function Header() {
                 <div className="absolute right-0 mt-2 w-48 bg-muted-800 rounded-md shadow-lg overflow-hidden z-10 opacity-0 group-hover:opacity-100 invisible group-hover:visible transition-all duration-200 transform origin-top-right scale-95 group-hover:scale-100">
                   <div className="py-1">
                     <Link to="/profile" className="block px-4 py-2 text-sm hover:bg-muted-700">My Profile</Link>
-                    <Link to="/bookings" className="block px-4 py-2 text-sm hover:bg-muted-700">My Bookings</Link>
+                    <Link to="/bookings" className="block px-4 py-2 text-sm hover:bg-muted-700">
+                      <div className="flex items-center">
+                        <Ticket className="h-4 w-4 mr-2" />
+                        My Bookings
+                      </div>
+                    </Link>
                     {user?.isAdmin && (
                       <Link to="/admin" className="block px-4 py-2 text-sm hover:bg-muted-700">Admin Dashboard</Link>
                     )}
@@ -139,9 +147,12 @@ export default function Header() {
             <Link to="/theaters" className="text-xl font-medium" onClick={closeMenu}>
               Theaters
             </Link>
-            <Link to="/offers" className="text-xl font-medium" onClick={closeMenu}>
-              Offers
-            </Link>
+            {isAuthenticated && (
+              <Link to="/bookings" className="text-xl font-medium flex items-center" onClick={closeMenu}>
+                <Ticket className="h-5 w-5 mr-2" />
+                My Bookings
+              </Link>
+            )}
           </nav>
 
           <div className="mt-auto">
@@ -150,7 +161,8 @@ export default function Header() {
                 <Link to="/profile" className="block text-xl font-medium" onClick={closeMenu}>
                   My Profile
                 </Link>
-                <Link to="/bookings" className="block text-xl font-medium" onClick={closeMenu}>
+                <Link to="/bookings" className="block text-xl font-medium flex items-center" onClick={closeMenu}>
+                  <Ticket className="h-5 w-5 mr-2" />
                   My Bookings
                 </Link>
                 {user?.isAdmin && (
